@@ -6,21 +6,22 @@ int main() {
     int t;
     cin >> t;
     while(t--) {
-        int n;
+        ull n;
         cin >> n;
         string s;
         cin >> s;
         char x;
         cin >> x;
-        int res = 0;
+        int seglen = 0;
+        int sub = 0;
         for(int i = 0; i < n; i++) {
-            int f = 0;
-            for(int j = i; j < n; j++)
-                if(s[j] == x) {
-                    f = 1;
-                    res += n - j;
-                }
+            if(s[i] != x) seglen++;
+            else {
+                sub += seglen* (seglen+ 1) / 2;
+                seglen= 0;
+            }
         }
-        cout << res << "\n";
+        sub += seglen* (seglen+ 1) / 2;
+        cout << (n * (n + 1) / 2) - sub << "\n";
     }
 }
